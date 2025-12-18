@@ -50,14 +50,28 @@ function login() {
     authMessage.innerText = `Sveikas, ${username}! 👋`;
 }
 
+// function displayMeals(meals) {
+//     results.innerHTML = meals.map(meal => `
+//         <div onclick="showRecipe(${meal.idMeal})" style="cursor:pointer">
+//             <h3>${meal.strMeal}</h3>
+//             <img src="${meal.strMealThumb}" width="200">
+//         </div>
+//     `).join("");
+// }
+
 function displayMeals(meals) {
     results.innerHTML = meals.map(meal => `
-        <div onclick="showRecipe(${meal.idMeal})" style="cursor:pointer">
+        <div style="cursor:pointer">
             <h3>${meal.strMeal}</h3>
-            <img src="${meal.strMealThumb}" width="200">
+            <img 
+                src="${meal.strMealThumb}" 
+                width="200"
+                onclick="showRecipe(${meal.idMeal})"
+            >
         </div>
     `).join("");
 }
+
 
 
 async function searchByIngredients() {
@@ -102,6 +116,21 @@ async function searchByIngredients() {
 }
 
 
+// async function showRecipe(id) {
+//     const response = await fetch(
+//         `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+//     );
+//     const data = await response.json();
+//     const meal = data.meals[0];
+
+//     results.innerHTML = `
+//         <h2>${meal.strMeal}</h2>
+//         <img src="${meal.strMealThumb}" width="300">
+//         <h3>Instrukcijos</h3>
+//         <p>${meal.strInstructions}</p>
+//     `;
+// }
+
 async function showRecipe(id) {
     const response = await fetch(
         `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
@@ -109,12 +138,39 @@ async function showRecipe(id) {
     const data = await response.json();
     const meal = data.meals[0];
 
+    const ingredients = getIngredients(meal)
+        .map(i => `<li>${i}</li>`)
+        .join("");
+
     results.innerHTML = `
         <h2>${meal.strMeal}</h2>
         <img src="${meal.strMealThumb}" width="300">
-        <h3>Instrukcijos</h3>
+
+        <h3>Ingredientai</h3>
+        <ul>
+            ${ingredients}
+        </ul>
+
+        <h3>Gaminimo instrukcijos</h3>
         <p>${meal.strInstructions}</p>
     `;
 }
+
+
+function getIngredients(meal) {
+    const list = [];
+
+    for (let i = 1; i <= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`];
+        const measure = meal[`strMeasure${i}`];
+
+        if (ingredient && ingredient.trim() !== "") {
+            list.push(`${measure} ${ingredient}`);
+        }
+    }
+
+    return list;
+}
+
 
 
