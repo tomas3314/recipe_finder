@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="lt">
 <head>
     <meta charset="UTF-8">
@@ -31,6 +31,73 @@
 <button onclick="search()">Ieškoti</button>
 
 <div id="results"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+
+<div id="login-screen">
+    <h1>Prisijungimas</h1>
+
+    <input id="loginUser" placeholder="Vartotojo vardas">
+    <input id="loginPass" type="password" placeholder="Slaptažodis">
+
+    <button onclick="login()">Prisijungti</button>
+
+    <p>
+        Neturi paskyros?
+        <button onclick="showRegister()">Registruotis</button>
+    </p>
+
+    <p id="loginMsg"></p>
+</div>
+
+<!-- REGISTER SCREEN -->
+<div id="register-screen" style="display:none">
+    <h1>Registracija</h1>
+
+    <input id="regUser" placeholder="Vartotojo vardas">
+    <input id="regPass" type="password" placeholder="Slaptažodis">
+
+    <button onclick="register()">Sukurti paskyrą</button>
+
+    <p>
+        <button onclick="showLogin()">Grįžti prie prisijungimo</button>
+    </p>
+
+    <p id="registerMsg"></p>
+</div>
+
+<!-- APP SCREEN -->
+<div id="app-screen" style="display:none">
+    <h1>Recipe Finder</h1>
+
+    <button onclick="logout()">Atsijungti</button>
+
+    <br><br>
+
+    <input id="searchInput" placeholder="pvz: chicken">
+    <button onclick="search()">Ieškoti</button>
+
+    <br><br>
+
+    <input id="ingredientInput" placeholder="pvz: chicken, rice">
+    <button onclick="filterByIngredients()">Filtruoti</button>
+
+    <div id="results"></div>
+</div>
 
 <script src="script.js"></script>
 </body>
