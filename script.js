@@ -50,3 +50,71 @@ function login() {
     authMessage.innerText = `Sveikas, ${username}! 👋`;
 }
 
+function displayMeals(meals) {
+    results.innerHTML = meals.map(meal => `
+        <div onclick="showRecipe(${meal.idMeal})" style="cursor:pointer">
+            <h3>${meal.strMeal}</h3>
+            <img src="${meal.strMealThumb}" width="200">
+        </div>
+    `).join("");
+}
+
+
+async function searchByIngredients() {
+    const input = ingredientInput.value
+        .toLowerCase()
+        .split(",")
+        .map(i => i.trim())
+        .filter(i => i !== "");
+
+    results.innerHTML = "Filtruojama pagal ingredientus...";
+
+    // 1. Paimam DAUG receptų (pvz. pagal paiešką be filtro)
+    const response = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/search.php?s="
+    );
+    const data = await response.json();
+
+    if (!data.meals) {
+        results.innerHTML = "Nėra receptų.";
+        return;
+    }
+
+    // 2. Filtruojam patys
+    const filtered = data.meals.filter(meal => {
+        const ingredients = [];
+
+        for (let i = 1; i <= 20; i++) {
+            const ing = meal[`strIngredient${i}`];
+            if (ing) ingredients.push(ing.toLowerCase());
+        }
+
+        // tikrina ar VISI ingredientai yra recepte
+        return input.every(i => ingredients.includes(i));
+    });
+
+    if (filtered.length === 0) {
+        results.innerHTML = "Nerasta receptų su šiais ingredientais 😕";
+        return;
+    }
+
+    displayMeals(filtered);
+}
+
+
+async function showRecipe(id) {
+    const response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    );
+    const data = await response.json();
+    const meal = data.meals[0];
+
+    results.innerHTML = `
+        <h2>${meal.strMeal}</h2>
+        <img src="${meal.strMealThumb}" width="300">
+        <h3>Instrukcijos</h3>
+        <p>${meal.strInstructions}</p>
+    `;
+}
+
+
