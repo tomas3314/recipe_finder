@@ -1,105 +1,81 @@
-<!-- <!DOCTYPE html>
+
+
+<!DOCTYPE html>
 <html lang="lt">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Finder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>🍽️ Recipe Finder</h1>
+    <!-- Navigacija -->
+    <nav>
+        <div class="logo">Recipe Finder</div>
+        <ul>
+            <li><a href="#">Pagrindinis</a></li>
+            <li><a href="#" id="loginBtn">Prisijungti</a></li>
+            <li><a href="#" id="registerBtn">Registruotis</a></li>
+        </ul>
+    </nav>
 
-<h2>Registracija</h2>
-<input id="regUsername" placeholder="Vartotojo vardas">
-<input id="regPassword" type="password" placeholder="Slaptažodis">
-<button onclick="register()">Registruotis</button>
+    <!-- Hero blokas su paieška -->
+    <section class="hero">
+        <h1>Rask savo mėgstamą receptą!</h1>
+        <p>Ieškok pagal ingredientus arba kategoriją.</p>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Įvesk ingredientą...">
+            <select id="categoryFilter">
+                <option value="all">Visos kategorijos</option>
+                <option value="desertas">Desertas</option>
+                <option value="pietus">Pietūs</option>
+                <option value="pusryciai">Pusryčiai</option>
+                <option value="uzkandis">Užkandis</option>
+            </select>
+            <button id="searchBtn">Ieškoti</button>
+        </div>
+    </section>
 
-<h2>Prisijungimas</h2>
-<input id="loginUsername" placeholder="Vartotojo vardas">
-<input id="loginPassword" type="password" placeholder="Slaptažodis">
-<button onclick="login()">Prisijungti</button>
+    <!-- Receptai masonry grid -->
+    <section class="recipes" id="recipeGrid">
+        <!-- Kortelės bus generuojamos JavaScript -->
+    </section>
 
-<p id="authMessage"></p>
-<hr>
+    <!-- Prisijungimo modalas -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Prisijungti</h2>
+            <form id="loginForm">
+                <input type="email" placeholder="El. paštas" required>
+                <input type="password" placeholder="Slaptažodis" required>
+                <button type="submit">Prisijungti</button>
+            </form>
+        </div>
+    </div>
 
-<h2>Ieškoti pagal ingredientus</h2>
-<input id="ingredientInput" placeholder="pvz: chicken, rice">
-<button onclick="searchByIngredients()">Filtruoti</button>
+    <!-- Registracijos modalas -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Registruotis</h2>
+            <form id="registerForm">
+                <input type="text" placeholder="Vardas" required>
+                <input type="email" placeholder="El. paštas" required>
+                <input type="password" placeholder="Slaptažodis" required>
+                <button type="submit">Registruotis</button>
+            </form>
+        </div>
+    </div>
 
+    <footer>
+        &copy; 2025 Recipe Finder. Visi teisės saugomos.
+    </footer>
 
-<input id="searchInput" placeholder="Įvesk patiekalą (pvz: chicken)">
-<button onclick="search()">Ieškoti</button>
-
-<div id="results"></div>
-
-<script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
- -->
 
- <!DOCTYPE html>
-<html lang="lt">
-<head>
-    <meta charset="UTF-8">
-    <title>Recipe Finder</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<!-- LOGIN SCREEN -->
-
-<div id="login-screen">
-    <h1>Prisijungimas</h1>
-
-    <input id="loginUser" placeholder="Vartotojo vardas">
-    <input id="loginPass" type="password" placeholder="Slaptažodis">
-
-    <button onclick="login()">Prisijungti</button>
-
-    <p>
-        Neturi paskyros?
-        <button onclick="showRegister()">Registruotis</button>
-    </p>
-
-    <p id="loginMsg"></p>
-</div>
-
-<!-- REGISTER SCREEN -->
-<div id="register-screen" style="display:none">
-    <h1>Registracija</h1>
-
-    <input id="regUser" placeholder="Vartotojo vardas">
-    <input id="regPass" type="password" placeholder="Slaptažodis">
-
-    <button onclick="register()">Sukurti paskyrą</button>
-
-    <p>
-        <button onclick="showLogin()">Grįžti prie prisijungimo</button>
-    </p>
-
-    <p id="registerMsg"></p>
-</div>
-
-<!-- APP SCREEN -->
-<div id="app-screen" style="display:none">
-    <h1>Recipe Finder</h1>
-
-    <button onclick="logout()">Atsijungti</button>
-
-    <br><br>
-
-    <input id="searchInput" placeholder="pvz: chicken">
-    <button onclick="search()">Ieškoti</button>
-
-    <br><br>
-
-    <input id="ingredientInput" placeholder="pvz: chicken, rice">
-    <button onclick="filterByIngredients()">Filtruoti</button>
-
-    <div id="results"></div>
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
 

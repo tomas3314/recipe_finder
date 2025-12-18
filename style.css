@@ -1,12 +1,48 @@
-body {
-    font-family: Arial;
-    text-align: center;
-    background: #f4f4f4;
-}
+--- Pagrindiniai nustatymai ---
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+body { background-color: #FFF8F0; color: #333; line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
 
-img {
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
+/* --- Navigacija --- */
+nav { background-color: #FFA07A; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2);}
+nav .logo { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; color: #fff; }
+nav ul { list-style: none; display: flex; gap: 20px; }
+nav ul li a { color: #fff; font-weight: 600; transition: opacity 0.3s; }
+nav ul li a:hover { opacity: 0.8; }
 
+/* --- Hero blokas --- */
+.hero { text-align: center; padding: 80px 20px; background: linear-gradient(to right, #FFB347, #FFCC33); color: #fff; }
+.hero h1 { font-family: 'Poppins', sans-serif; font-size: 48px; margin-bottom: 20px; }
+.hero p { font-size: 20px; margin-bottom: 30px; }
+.search-box { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.search-box input[type="text"], .search-box select { padding: 12px 15px; border-radius: 50px; border: none; outline: none; font-size: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.2s; }
+.search-box input[type="text"]:focus, .search-box select:focus { transform: scale(1.02); }
+.search-box button { padding: 12px 25px; background-color: #FF7F50; color: #fff; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: background-color 0.3s, transform 0.2s; }
+.search-box button:hover { background-color: #FF6347; transform: scale(1.05); }
 
+/* --- Masonry grid receptai --- */
+.recipes { column-count: 3; column-gap: 20px; padding: 40px 30px; }
+.recipe-card { background-color: #fff; border-radius: 15px; margin-bottom: 20px; overflow: hidden; display: inline-block; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.3s, box-shadow 0.3s; }
+.recipe-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+.recipe-card img { width: 100%; height: auto; object-fit: cover; }
+.recipe-card-content { padding: 15px; }
+.recipe-card-content h2 { font-family: 'Poppins', sans-serif; font-size: 20px; margin-bottom: 10px; }
+.recipe-card-content p { font-size: 14px; color: #555; margin-bottom: 10px; }
+.recipe-card-content button { padding: 10px 20px; border: none; background-color: #FF7F50; color: #fff; border-radius: 50px; cursor: pointer; transition: background-color 0.3s; }
+.recipe-card-content button:hover { background-color: #FF6347; }
+
+/* --- Modalai --- */
+.modal { display: none; position: fixed; z-index: 10; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+.modal-content { background-color: #fff; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); position: relative; text-align: center; }
+.modal-content h2 { margin-bottom: 20px; font-family: 'Poppins', sans-serif; }
+.modal-content input { width: 100%; padding: 12px 15px; margin-bottom: 15px; border-radius: 50px; border: 1px solid #ccc; outline: none; }
+.modal-content button { padding: 12px 25px; background-color: #FF7F50; color: #fff; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; }
+.modal-content button:hover { background-color: #FF6347; }
+.close { position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
+
+/* --- Footer --- */
+footer { text-align: center; padding: 20px; background-color: #FFA07A; color: #fff; margin-top: 50px; }
+
+/* --- Responsive --- */
+@media (max-width: 1024px) { .recipes { column-count: 2; } }
+@media (max-width: 768px) { .recipes { column-count: 1; } .hero h1 { font-size: 36px; } .hero p { font-size: 16px; } .search-box input[type="text"], .search-box select { width: 200px; } }
