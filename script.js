@@ -22,3 +22,31 @@ async function search() {
         </div>
     `).join("");
 }
+
+function register() {
+    const username = regUsername.value;
+    const password = regPassword.value;
+
+    if (!username || !password) {
+        authMessage.innerText = "Užpildyk visus laukus";
+        return;
+    }
+
+    localStorage.setItem("user", JSON.stringify({ username, password }));
+    authMessage.innerText = "Paskyra sukurta ✅";
+}
+
+function login() {
+    const username = loginUsername.value;
+    const password = loginPassword.value;
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || user.username !== username || user.password !== password) {
+        authMessage.innerText = "Neteisingi duomenys ❌";
+        return;
+    }
+
+    authMessage.innerText = `Sveikas, ${username}! 👋`;
+}
+
